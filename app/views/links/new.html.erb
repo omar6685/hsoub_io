@@ -1,0 +1,29 @@
+<h1><%= t '.heading' %></h1>
+
+<%= form_with scope: :link, url: links_path, local: true do |form| %>
+	<% if @link.errors.any?%>
+    <div id="error_explanation">
+      <ul>
+        <% @link.errors.messages.values.each do |msg| %>
+          <%msg.each do  |m| %>
+            <li><%= m %></li>
+          <%end %>
+        <% end %>
+        <% @post.errors.messages.values.each do |msg| %>
+          <%msg.each do  |m| %>
+            <li><%= m %></li>
+          <%end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= form.collection_select :community_id, Community.order(:name),:id,:name, {prompt: t('.select_community')}, {:class=>'collection_select'}%>
+    <%= form.text_field :url, placeholder: true %>
+    <%= form.text_field :title, placeholder: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

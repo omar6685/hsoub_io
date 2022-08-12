@@ -1,0 +1,23 @@
+<div class="listItem comment row">
+	<div class="postQuestion col-md-12">
+		<div class="postDetails ">
+			<ul>
+				<li class="pull-right">
+					<span><%= link_to comment.user.email,  u_path(@post.user)%> </span>
+				</li>
+				<li class="pull-right">
+					<i class="glyphicon glyphicon-time"></i>
+					<%= comment.created_at %>
+				</li>
+				<li class="pull-right">
+					<i class="glyphicon glyphicon-time"></i>
+					<%= link_to t('.reply'), new_post_comment_path(@post, :parent_id => comment) %>
+				</li>
+			</ul>
+		</div>
+		</br></br>
+		<div>
+			<%= comment.text %>
+		</div>
+	</div>
+</div>

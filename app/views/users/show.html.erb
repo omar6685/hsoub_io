@@ -1,0 +1,15 @@
+<%= render 'users/user_profile' %>
+<h2 class="inline"><%= t '.my_posts' %>  |  </h2>
+<h2 class="inline"><%= link_to t('.my_comments'),  u_comments_path(@user)%></h2>
+<div class="content container">
+  	<div class="itemsList">
+  		<% if @posts.empty? %>
+			<div class="listItem row">
+				<h2><%= t '.nil_posts' %></h2>
+			</div>
+		<% else %>
+  			<%= render @posts %>
+		<% end %>
+  	</div>
+</div>
+</br>

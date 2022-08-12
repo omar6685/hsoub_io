@@ -1,0 +1,7 @@
+<%= form_tag posts_path, method: "get" do %>
+  <div class="btn-group">
+    <%= text_field_tag :search, params[:search], id: 'searchinput' , :placeholder => t("serach_for") %>
+    <a href="/"><span id="searchclear" class="glyphicon glyphicon-remove-circle"></span></a>
+  </div>
+  <%= submit_tag t("search"), :name => nil %>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="listItem row">
+	<div class="post_vote col-md-1">
+		<div>
+			<%= link_to vote_post_path(post, type: "up"), method: "post" do %>
+				<i class="glyphicon glyphicon-menu-up"></i>
+			<% end %>
+			<div class="post_points">
+				<%= post.find_votes_for(:vote_scope => 'reputation').sum(:vote_weight) %>
+			</div>
+			<%= link_to vote_post_path(post, type: "down"), method: "post" do %>
+				<i class="glyphicon glyphicon-menu-down"></i>
+			<% end %>
+		</div>
+	</div>
+	<div class="postQuestion col-md-11">
+		<h2><%= link_to post.title, post_path(post) %></h2>
+		<div class="postDetails ">
+			<ul>
+			    <li class="pull-right">
+			    	<span><%= link_to post.user.email,  u_path(post.user)%> </span>
+				</li>
+		      	<li class="pull-right">
+		      		<i class="glyphicon glyphicon-align-justify"></i>
+		      		<%= link_to post.community.name,  community_path(post.community)%>
+		        </li>
+		    	<li class="pull-right">
+		    		<i class="glyphicon glyphicon-time"></i>
+		      		<%= post.user.created_at.strftime('%B %e %Y at %l:%M %p') %>
+		    	</li>
+		      	<li class="pull-right">
+		      		<i class="glyphicon glyphicon-comment"></i>
+		      		<%= link_to "#{post.comments.count} #{t('comment_count')} ", post_path(post) %>
+		      	</li>
+	  		</ul>
+		</div>
+	</div>
+</div>

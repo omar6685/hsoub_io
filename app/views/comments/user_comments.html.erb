@@ -1,0 +1,39 @@
+<%= render 'users/user_profile' %>
+<h2 class="inline"><%= link_to t('.my_posts'),  u_path(params[:u_id]) %>  |  </h1>
+<h2 class="inline"><%=  t('.my_comments') %></h1>
+<div class="content container">
+  	<div class="itemsList">
+  		<% if @comments.any? %>
+  			<% @comments.each do |comment| %>
+		  		<div class="listItem comment row">
+					<div class="postQuestion col-md-12">
+						<div class="postDetails ">
+							<ul>
+								<li class="pull-right">
+									<span><%= link_to comment.user.email,  u_path(comment.post.user)%> </span>
+								</li>
+								<li class="pull-right">
+									<i class="glyphicon glyphicon-time"></i>
+									<%= comment.created_at %>
+								</li>
+								<li class="pull-right">
+									<i class="glyphicon glyphicon-time"></i>
+									<%= link_to t('.reply'), new_post_comment_path(comment.post, :parent_id => comment) %>
+								</li>
+							</ul>
+						</div>
+						</br></br>
+						<div>
+							<%= comment.text %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="listItem row">
+		  		<h2><%= t('.nil') %></h2>
+		  	</div>
+		<% end %>
+  	</div>
+</div>
+</br>

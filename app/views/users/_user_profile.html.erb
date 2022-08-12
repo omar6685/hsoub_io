@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="profileBreif col-xs-12 no-padding">
+	    <div id="profile-subHeader">
+	      	<div class="userBasicInfo col-xs-12 col-md-9">
+		        <div class="profileImg pull-right no-padding">
+		          <a href="#">
+		            <%= image_tag("user.png", :alt => "مستخدم", :class => "img-circle img-responsive") %>
+		          </a>
+		        </div>
+		        <div class="profileDesc pull-right no-padding">
+		          	<h2><%= @user.first_name + " " + @user.last_name%></h2>
+		          	<% if @user.description.empty? %>
+		           		<p><%= t('.nil_description') %>  <%= link_to t('.edit_account'),  edit_user_registration_path %></p>
+		           	<% else %>
+		            	<p><%= @user.description %></p>
+		           	<% end %>
+		        </div>
+	      	</div>
+	      	<div class="col-md-3 col-xs-12">
+		        <div class="infoBlocks">
+		          <div class="inf pull-right text-center">
+		           	<div class="contBlock">
+		              نقاط السمعة <b> <%= @user.reputation %> </b>
+		            </div>
+		          </div>
+		          <div class="inf pull-right text-center">
+		            <div class="contBlock">
+		              تاريخ التسجيل <b><%= @user.created_at.to_date %></b>
+		          	</div>
+		          </div>
+		        </div>
+	      	</div>
+	    </div>
+    </div>
+  </div>
+</div>

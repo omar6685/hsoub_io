@@ -1,0 +1,76 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.inline{
+	display: inline;
+}
+
+.profileBreif{
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#profile-subHeader {
+    padding: 15px 0 0;
+    display: flex;
+}
+
+#profile-subHeader>div {
+    padding-bottom: 15px;
+}
+
+.userBasicInfo {
+    border-left: 1px solid #e4e4e4;
+    padding: 20px 0;
+    margin-top: -20px;
+}
+
+.profileImg {
+    width: 160px;
+    height: 120px;
+    background-color: #fff;
+}
+
+.profileImg img {
+    max-width: 120px;
+    max-height: 120px;
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+}
+
+.profileDesc {
+    vertical-align: top;
+    width: calc(100% - 170px);
+}
+
+.profileDesc h2 {
+    font-size: 26px;
+    margin-top: 0px;
+}
+
+.userCardHeaderText {
+    width: calc(100% - 95px);
+}
+
+.infoBlocks {
+    width: 100%;
+}
+
+.infoBlocks .inf {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.infoBlocks .inf:first-child {
+    margin-top: 0px;
+}
+
+.infoBlocks .inf .contBlock {
+    margin: 0;
+    padding: 10px 0;
+    background: #f2f2f2;
+}
+
+

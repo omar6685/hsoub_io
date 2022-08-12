@@ -1,0 +1,37 @@
+= Project: Notification
+
+== Description
+
+Notification is a one stop shop for notification, it knows how to send messages via GMail, SMS,
+growl, snarl, etc, and all these are exposed in a simple, uniform way.
+
+== Usage
+
+  require 'rubygems'
+  require 'notification'
+
+  gmail = GmailNotifier.new(:name => 'dsls.in.ruby', :password => 'dslsinruby', :to => 'jeremystellsmith@gmail.com')
+  sms   = SmsNotifier.new(gmail, '312-953-1193')
+  growl = GrowlNotifier.new
+
+  message = "Hello World"
+  email.notify(message)
+  sms.notify(message)
+  growl.notify(message)
+
+== Currently Implemented Notifications
+
+* GMail
+* SMS (via teleflip)
+* Growl
+* Snarl
+
+== Contact
+
+Author::     Jeremy Stell-Smith
+Email::      jeremystellsmith@gmail.com
+License::    LGPL License
+
+== Home Page
+
+http://onemanswalk.com

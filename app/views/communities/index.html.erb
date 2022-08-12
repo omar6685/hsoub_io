@@ -1,0 +1,16 @@
+<h1><%= t '.title' %></h1>
+  	<div class="content container">
+  		<div class="itemsList">
+  			<% if @communities.empty? %>
+  				<div class="listItem row">
+  					<h2><%= t '.nil_communities' %></h2>
+  				</div>
+  			<% else %>
+	  			<% @communities.each do |community| %>
+		  			<h2><%= link_to community.name, community_path(community) %></h2>
+				  <% end %>
+			  <% end %>
+  		</div>
+  	</div>
+</table>
+</br>

@@ -1,0 +1,56 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+      <li>
+          <a data-toggle="collapse" data-target="#add" class="title">
+            <%= t('.add.title')%>
+            <i class="fas fa-angle-down"></i>
+          </a>
+          <ul id="add" class="collapse in">
+            <li>
+              <a href="/links/new"><%= t('.add.link')%></a>
+            </li>
+            <li>
+              <a href="/topics/new"><%= t('.add.topic')%></a>
+            </li>
+            <li>
+              <a href="/communities/new"><%= t('.add.community')%></a>
+            </li>
+          </ul>
+      </li>
+      <li>
+          <a data-toggle="collapse" data-target="#communities" class="title">
+            <%= t('.communities')%>
+            <i class="fas fa-angle-down"></i>
+          </a>
+          <ul id="communities" class="collapse in">
+            <% if @communities.empty? %>
+                <li>
+                  <a href="/communities/new"><%= t('.nil_communities')%><%= t('.add.community')%></a>
+                </li>
+            <% else %>
+              <% @communities.each do |community| %>
+                <li>
+                  <%= link_to community.name, main_app.community_path(community) %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+      </li>
+      <li>
+          <a data-toggle="collapse" data-target="#social-media" class="title">
+            <%= t('.social-media.title')%>
+            <i class="fas fa-angle-down"></i>
+          </a>
+          <ul id="social-media" class="collapse in">
+            <li>
+              <a href="https://www.facebook.com/HsoubIO" target="_blank"><%= t('fb')%></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/HsoubIO" target="_blank"><%= t('twitter')%></a>
+            </li>
+          </ul>
+      </li>
+  </ul>
+</div>
+<!-- /#sidebar-wrapper -->

@@ -1,0 +1,15 @@
+<h1><%= t('.heading') %></h1>
+<div class="itemsList">
+	<%= render @comment %>
+</div>
+
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <%= form.hidden_field(:parent_id, {value: params[:parent_id]}) %>
+  <p>
+    <%= form.text_area :text, {placeholder: true, :class=>'text_area'}%>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

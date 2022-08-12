@@ -1,0 +1,50 @@
+=== 4.1 / 2014-02-14
+
+Enhancements:
+
+* Support for HTTPS resources (NSImage icons).  Pull request #10 by Barry
+  Allard.
+* Added UDP growl broadcast support via the API only.  This does not work with
+  growl 2.x as UDP support was removed.  Issue #9 by Osborne Brook
+  Partnership.
+
+Bug fixes:
+
+* Fixed documentation link in README.  Issue #7 by Robby Colvin.
+* Fixed handling of UTF-8 messages with icon files.  Issue #10 by kunigaku.
+
+=== 4 / 2012-04-04
+
+* API changes:
+  * Growl is now a wrapper for Growl::UDP (1.2 and older) and Growl::GNTP (1.3
+    and newer).  The main difference is that notifications need to be
+    registered with Growl#add_notification instead of via Growl#initialize.
+  * Ruby 1.9.2 or newer is required to use ruby-growl
+
+* Major enhancements
+  * Added GNTP protocol support for registration and notification including
+    application and notification icons and callbacks.
+  * Moved UDP protocol support to Growl::UDP
+  * Growl automatically determines if the growl server supports GNTP or UDP
+    and uses the best protocol.
+
+=== 3.0 / 2010-09-11
+
+* Major enhancement
+  * Dropped support for ruby 1.8.6 and older.
+
+=== 2.1 / 2010-09-11
+
+* Minor enhancement
+  * Use String#bytesize if available.  Patch by SAWADA Tadashi.
+
+=== 2.0 / 2010-06-11
+
+* Major Enhancements
+  * 1.9-ready
+  * Notification levels now work on x86
+  * Notification levels no longer work on PPC
+
+* Minor Enhancements
+  * Added Growl.list which finds local hosts running growl using dnssd.
+

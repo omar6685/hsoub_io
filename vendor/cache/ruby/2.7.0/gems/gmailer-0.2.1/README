@@ -1,0 +1,631 @@
+== Description
+	A class for interface to Google's webmail service
+
+
+== Synopsis
+==== A typical code sequence for fetching gmails
+
+   GMailer.connect(name, pwd) do |g|
+     g.messages(:label=>"my_label") {|ml|
+        puts "Total # of conversations of my_label = " + ml.total.to_s
+     }
+   end
+
+
+=== Sending new gmails with gmailer
+
+   GMailer.connect(name, pwd) do |g|
+      # 'From' default gmail.com account
+      g.send(
+        :to => "who@what.com, my_friend@his_company.com, god@heaven.org",
+        :cc => "foo@bar.com",
+        :subject => "Hello There!",
+        :body => "Hi...\n\nBlah blah blah~...",
+        :files => ["./my_pic.jpg", "./my_cv.txt"])
+
+      # Send html email
+      g.send(
+        :to => "who@what.com, my_friend@his_company.com, god@heaven.org",
+        :subject => "Hello There!",
+        :ishtml => 1,
+        :body => "<font color=blue>Hi...\n\nBlah blah blah~...</font>")
+
+      # multiple verified email addresses and choose one 'From:' email address
+      g.send(
+        :from => "verified@email.com",
+        :to => "who@what.com, my_friend@his_company.com, god@heaven.org",
+        :cc => "foo@bar.com",
+        :subject => "Hello There!",
+        :body => "Hi...\n\nBlah blah blah~...",
+        :files => ["./my_pic.jpg", "./my_cv.txt"])
+   end
+
+
+=== Playing around with contact list
+
+   GMailer.connect(name, pwd) do |g|
+     puts "Your frequently used addresses:"
+     g.fetch(:contact=>"freq").each do |item| 
+       puts "Name: #{item.name} Email: #{item.email}" 
+     end 
+
+     puts "Your all contact addresses:"
+     g.fetch(:contact=>"all").each do |item| 
+       puts "Name: #{item.name} Email: #{item.email}" 
+     end 
+
+     puts "Your groups:"
+     g.fetch(:contact=>"group").each do |item| 
+       puts "ID: #{item.id} Name: #{item.name} Email: #{item.email}" 
+       g.fetch(:contact=>"group_detail",:param=>item.id).each do |detail| 
+         puts "  Group Name: #{detail.group_names} Group Email: #{detail.group_email}"
+         detail.members.each do |m|
+           puts "  Member ID: #{m.id}, Name: #{m.name}, Email: #{m.email}"
+         end
+       end
+     end  
+
+     puts "Search and Detail Contact:"
+     g.fetch(:contact=>"search",:param=>'phasis').each do |item| 
+       puts "Name: #{item.name} Email: #{item.email}" 
+       g.fetch(:contact=>"detail",:param=>item.id).each do |detail| 
+         puts "ID: #{item.id} Name: #{item.name} Email: #{item.email} Notes: #{item.notes} Details: #{item.details}" 
+       end  
+     end  
+
+     puts "Edit contact info:"
+     contact_id = "7"
+     g.edit_contact(contact_id, "John", "john@company.com", 'Supervisor of project X',[{:phone=>'642-5678',:mobile=>'837-1233',:fax=>'111-1111'}])      
+
+     puts "Add contact info:"
+     g.add_contact('Mike', 'mike@company.com', 'Mike',[{:phone=>'642-5678',:mobile=>'837-1233',:fax=>'111-1111'},{:phone=>'1-23-5378',:mobile=>'8-31-1233',:fax=>'122-1321'}])      
+     
+     puts "Delete Contact:"
+     contact_id = "18"
+     g.delete_contact(contact_id)
+
+     puts "Add sender to Contact:"
+     msg_id = '11276ede68783f04'
+     g.add_sender_to_contact(msg_id)
+
+   end
+
+=== Get list of labels and get list of messages
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+ labels = g.labels
+ g.messages(:label=>labels[0]).each {|m|
+    puts "Subject: #{m.subject} / Snippet: #{m.snippet}" if m.new?
+ }
+end
+
+=== Edit labels
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+ #creating new labels
+ g.create_label('label_name')
+
+ #renaming existing labels
+ g.rename_label('label_name','renamed_label')
+ 
+ #deleting labels
+ g.delete_label('label_name')
+
+ #applying a label to a message
+ g.apply_label(msgid,'label_name')
+
+ #removing a label from a message
+ g.remove_label(msgid,'label_name')
+
+ g.msg(msgid) {|m|
+   #applying a label to a message
+   m.apply_label('label_name')
+
+   #removing a label from a message
+   m.remove_label('label_name')
+ }
+
+end
+
+=== Update preferece
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    g.update_preference(:max_page_size=>50,
+		:keyboard_shortcuts=>true,
+		:indicators=>true,
+		:display_language=>'en',
+		:signature=>'This is a signature',
+		:reply_to=>'return@foo.bar',
+		:snippets=>true,
+		:display_name=>'Display Name')
+    pref = g.preference
+    puts "Display language:#{pref.display_language}, Max Page Size:#{pref.max_page_size}"
+end
+
+=== Apply star and remove star
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+  
+    #apply star to a message
+    g.apply_star(msgid)  # or g.msg(msgid).apply_star
+
+    #remove star from a message
+    g.remove_star(msgid) # or g.msg(msgid).remove_star
+end
+
+=== Archive and unarchive a message
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    #archive a message
+    g.archive(msgid)  # or g.msg(msgid).archive
+
+    #unarchive a message
+    g.unarchive(msgid) # or g.msg(msgid).unarchive
+end
+
+=== Mark read and unread a message
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    #mark a message as read
+    g.mark_read(msgid) # or g.msg(msgid).mark_read
+
+    #mark a message as unread
+    g.mark_unread(msgid) # or g.msg(msgid).mark_unread
+end
+
+=== Report spam and reverse
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    #report a message as not spam
+    g.report_spam(msgid) # or g.msg(msgid).report_spam
+
+    #report a message as not spam
+    g.report_not_spam(msgid) # or g.msg(msgid).report_not_spam
+end
+
+=== Trash In & Out and delete a message
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    #move a message to trash
+    g.trash(msgid) # or g.msg(msgid).trash
+
+    #move a message from trash to inbox
+    g.untrash(msgid) # or g.msg(msgid).untrash
+
+    #delete a trash message forever
+    g.delete_trash(msgid) # or g.msg(msgid).delete_trash
+
+    #delete a spam message forever
+    g.delete_spam(msgid) # or g.msg(msgid).delete_spam
+
+    #delete a message forever
+    g.delete_message(msgid) # or g.msg(msgid).delete_message
+end
+
+=== Show Original Message
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+    #show original
+    g.show_original(msgid) # of g.msg(msgid).original
+}
+
+=== Fetch messages with filter
+
+GMailer.connect(:username=>name,:password=>pwd) do |g|
+  g.messages(:standard=>'all',:read=>false).each_msg {|msg|
+     msg.apply_star
+     msg.apply_label(label)
+     puts "subject: " + msg.subject 
+     puts "from:    " + msg.sender 
+     puts msg.body
+     puts msg.original
+  }
+end
+
+== Class Methods
+GMailer.new(charset='UTF-8')
+	Returns a new GMailer object and set up charset.
+
+GMailer.new(name,pwd,charset='UTF-8')
+	Returns a new GMailer object and set up login information and charset.
+
+== Instance Methods
+set_login_Info(name, password, GMT_timezone=0)
+	To set the login information before connect.
+
+connect()
+	To connect to GMail.  It returns 1 if succeed, 0 otherwise.
+
+connect(name,pwd,charset='UTF-8')
+	Returns a new GMailer object and set up login information and charset.
+	and connect to GMail.  
+
+connect(connet hash)
+	Returns a new GMailer object and set up login information and charset.
+	and proxy connect to GMail.  proxy_port, proxy_user, proxy_pass can be omitted.
+        key - type simbol. One of :username,:password,:charset,:proxy_host,:proxy_user,:proxy_pass
+        value - each value of type
+        e.g. connect(:username=>'user',:password=>'pass',:proxy_host=>'proxy-host',
+             :proxy_port=>8080,:proxy_user=>'proxy_user',:proxy_pass=>'proxy_pass')
+
+connected?
+	To check if connected.
+
+fetch(action hash)
+	To fetch a result from GMail by given hash type=>box
+	key - type: symbol. One of :label,:standard,:conversation,:preference,:contact,:preference,:pos
+	value - box : name of "box" (e.g. Inbox, your_label, "all"/"freq" of contacts)
+	       or position: cursor for paged result. used 
+        e.g. fetch(:label=>'my_label',pos=>0)
+        It returns contact list in case key is :contact else returns sanpshot object
+
+fetch_box(type,box,position)
+	To fetch a result from GMail by given:
+	type: Gmailer constant, e.g. GM_LABEL.
+	box: name of "box" (e.g. Inbox, your_label, "all"/"freq" of contacts)
+	position: cursor for paged result.
+
+snapshot(type)
+	To get a "snapshot", an object (see GMailSnapshot below) for you to
+	access query result at ease.
+
+labels()
+	To get list of labels.	
+
+preference()
+	To get hash of preference setting.	
+
+messages()
+	To get list of messages.	
+
+attachment(attachment_id,message_id,filename,zipped)
+	To download an attachment of a message. If zipped is true, download ALL
+	attachements of message_id in a zip file.
+
+attachments_of(conv, path_to_store_files)
+	To download ALL files attached to a conversation. The full path of
+	downloaded files will be returned (as array).
+
+create_label(label)
+        To create new label
+
+rename_label(old_label,new_label)
+        To rename old_label to new_label
+
+delete_label(label)
+        To delete a label
+
+apply_label(msgid,label)
+        To apply a label to a message
+
+remove_label(msgid,label)
+        To remove a label to a message
+
+apply_star(msgid)
+        To apply starring to a message
+
+remove_star(msgid)
+        To remove starring from a message
+
+trash(msgid)
+        To move a message to trash
+
+untrash(msgid)
+        To move a message out of trash
+
+archive(msgid)
+        To archive a message
+
+unarchive(msgid)
+        To unarchive a message
+
+msg(msgid)
+        To fetch a message with msgid
+
+update_preference(preference hash)
+        To update preference setting
+        hash is one of :max_page_size(25,50,100),:keyboard_shortcuts(true,false),:indicators(true,false),
+         :display_language(two letter country code like 'en','ja','ko'...),:signature,:reply_to,
+         :snippets(true,false),:display_name       
+         e.g update_preference(:max_page_size=>100,:display_language=>'en')
+
+send(to,subject,body,cc,bcc,message_replying,thread_replying,attachments,draft_saving,draft_id)
+	To send gmail or save drafts. to, cc and bcc are comma-separated addresses.
+	attachments is an array of names of files to be attached.
+
+send(hash argument)
+	To send gmail or save drafts. to, cc and bcc are comma-separated addresses.
+	attachments is an array of names of files to be attached. e.g 
+        send(:to => "who@foo.bar" ,
+        :subject => "Hello There!",
+        :body => "Hi...\n\nBlah blah blah~...",
+        :files => ["./test.txt"])
+
+perform_action(action_type,message_id,label)
+	To perform action on message. message_id can be a string if only one message
+	to be acted.
+
+disconnect()
+	To disconnect from gmail.
+
+dump(query)
+	To dump ALL it gets from URL query string, including headers.
+
+standard_box()
+	To get an array of names of the "standard box" (Inbox, Starred, etc.)
+
+invite(email)
+	To send invite to email.
+
+
+== Constants
+
+GM_STANDARD
+	All about "Standard Box" (Inbox, Sent, All, Starred, Spam, Trash).
+
+GM_LABEL
+	All about labels.
+
+GM_CONVERSATION
+	All about conversation.
+
+GM_QUERY
+	All about search query.
+
+GM_CONTACT
+	All about contact list.
+
+GM_ACT_APPLYLABEL
+GM_ACT_REMOVELABEL
+	Apply/remove label from message.
+
+GM_ACT_STAR
+GM_ACT_UNSTAR
+	Star/unstar a message.
+
+GM_ACT_SPAM
+GM_ACT_UNSPAM
+	Mark/unmark message as spam.
+
+GM_ACT_READ
+GM_ACT_UNREAD
+	Mark message as read/unread.
+
+GM_ACT_ARCHIVE
+GM_ACT_INBOX
+	Move message away from/to Inbox.
+
+GM_ACT_TRASH
+GM_ACT_UNTRASH
+	Move message to/away from Trash.
+
+GM_ACT_DELFOREVER
+	Delete message forever.
+
+GM_ACT_UNDRAFT
+	Discard a draft.
+
+GM_ACT_TRASHMSG
+	Trash an individual message (not entire conversation).
+
+GM_ACT_DELSPAM
+	Delete (forever) a spam.
+
+GM_ACT_DELTRASHED
+	Delete (forever) a conversation in Trash.
+
+=== Standard constants
+VERSION
+	Returns the current version number of this package as a String.
+
+== Instance variables available to snapshot type: all except GM_CONTACT
+gmail_ver
+	Version of GMail javascript core program
+
+quota_mb
+	Mailbox quota in MB
+
+quota_per
+	Mailbox quota in percentage
+
+std_box_new
+	An array of conversations. Number of unread mails in each standard boxes.
+	You may call GMailer::getStandardBox() to get an array of names of standard boxes.
+
+have_invit
+	Number of invites you have. 0 = no invitation, etc.
+
+label_list
+	An array of label names.
+
+label_new
+	An array of label names. Number of unread mails in each labels.
+
+== Instance variables available to snapshot type: GM_STANDARD, GM_LABEL, GM_QUERY
+box_name
+	Name of the standard box/label or query string currently viewing.
+
+box_total
+	Total number of conversations in current mailbox.
+
+box_pos
+	Current starting position (for paged results).
+
+box
+	An array of conversations in current mailbox.
+
+=== methods of each conversation
+id
+	Conversation ID
+
+is_read
+	0 = read; 1 = not read yet.
+
+new?
+	false = read; true = not read yet.
+
+is_starred
+	0 = not starred; 1 = starred.
+
+star?
+	false = not starred; true = starred.
+
+date
+	Arrival date/time of the most recent message.
+
+sender
+	Senders of message in this conversation.
+
+flag
+	Flag.
+
+subject
+	Subject of this conversation.
+
+snippet
+	"Snippet", or preview of this conversation.
+
+labels
+	Number-indexed Array. Name of labels that this conversation is bearing.
+
+attachment
+	Number-indexed Array. Name of all attaching files of this conversation.
+
+msgid
+	Message ID of the most recently received message of this conversation.
+
+	Example (to get the subject of 6-th conversation of current viewing box): snapshot.box[5]["subject"]
+
+== Instance variables available to snapshot type: GM_CONVERSATION
+conv_title
+	Subject (title) of this conversation.
+
+conv_total
+	Total number of messages in this conversation.
+
+conv_id
+	Conversation ID.
+
+conv_labels
+	Number-indexed Array. Name of labels that this conversation is bearing.
+
+conv_starred
+	Is the conversation starred? This is true if any of the messages of a conversation is starred.
+
+conv
+	An array of messages of current conversation.
+
+=== conversation method
+index
+	Index.
+
+id
+	Message ID.
+
+is_draft
+	Is draft or not.
+
+draft_parent
+	Replying message ID of this draft.
+
+sender
+	Name of sender of this message.
+
+sender_email
+	Email address of the sender.
+
+recv
+	Name of recevier of this message.
+
+recv_email
+	Email address of the receiver.
+
+reply_email
+	Replying address of this message.
+
+cc_email
+	CC address of this message (draft).
+
+bcc_email
+	BCC address of this message (draft).
+
+dt_easy
+	Arrival date/time of this message in "easy" format, e.g. 9 Aug (2 days ago).
+
+dt
+	Arrival date/time of this message in "long" format, e.g. Mon, 9 Aug 2004 19:34:03 +0800.
+
+subject
+	Subject of this message.
+
+is_starred
+	Is the message starred?
+
+snippet
+	"Snippet", or preview of this message.
+
+body
+	Message body.
+
+attachment
+	An array of attachment-information.
+
+=== methods of each attachment
+id
+	Attachment ID.
+
+filename
+	Filename of this attching file.
+
+type
+	File type (e.g. JPG, GIF, PDF) of this attaching file.
+
+size
+	Size in bytes of this file.
+	Example: snapshot.conv[3]["attachment"][1]["size"] (size of the 2nd attaching file
+	of the 4th messages of current conversation)
+
+== Instance variables available to snapshot type: GM_CONTACT
+contacts
+	An array of entries of your address book.
+
+=== methods of each contact
+name
+	Name (nickname).
+
+email
+	Email address.
+
+notes
+	Notes.
+
+
+== Requirement
+	net/https
+
+== Acknowledgements
+	This class was originally based on the libgmaier for PHP module by
+	Y.H.Gan (http://gmail-lite.sourceforge.net/)
+
+== To Do
+   Proxy Setting
+
+== Known Bugs  
+	None that I know of.  Please log any other bug reports on the RubyForge
+   project page at http://rubyforge.org/projects/gmailutils
+
+== License
+    Ruby's
+
+== Copyright
+    (C) 2005 Park Heesob, All Rights Reserved
+
+== Warranty
+	This package is provided "as is" and without any express or
+	implied warranties, including, without limitation, the implied
+	warranties of merchantability and fitness for a particular purpose.
+
+== Authors
+   Park Heesob
+   phasis at gmail dot com
+   phasis68 on IRC (freenode)

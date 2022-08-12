@@ -1,0 +1,220 @@
+ar:
+  'login': 'دخول'
+  'sign_up': 'حساب جديد'
+  logout: "تسجيل الخروج"
+  my_posts: "مساهماتي"
+  new_link: "أضف رابطاً"
+  new_topic: "أضف موضوعاً"
+  new_community: "أضف مجتمع جديد"
+  voting_thanks: "شكراً لتصويتك!"
+  reputation: "نقاط السمعة"
+  my_account: "حسابي"
+  edit_account: "تعديل الحساب"
+  not_authorized: "ليس لديك الصلاحية للدخول"
+  search: "ابحث"
+  serach_for: "ابحث عن ..."
+  fb: "فيسبوك"
+  twitter: "تويتر"
+  linkedin: "لينكد إن"
+  short_link: "رابط مختصر"
+  comment_count: "تعليق"
+  search_result: "نتائج البحث: "
+  rss: "ملخص المجتمعات المشترك بها"
+  follow: 'متابعة'
+  unfollow: 'إلغاء المتابعة'
+  about:
+    paragraph: "حسوب I/O هو مجتمع عربي يمكّن المستخدمين من طرح مواضيع بغرض النقاش وتبادل الأفكار كذلك من متابعة العديد من المجتمعات في مجالات تهمهم والمساهمة ببناء مجتمعات أخرى ان رغبوا بذلك.
+
+هذا المجتمع ليس منتدى، بل مجموعة من المجتمعات المتخصصة تتم إدارته بشكل جماعي بناء على تصويت المستخدمين وذلك برفع المساهمات ذات المحتوى الجيد وخفض ترتيب المساهمات ذات المحتوى السيء. هذا الأسلوب بالإدارة أقرب الى الشبكة الاجتماعية المتخصصة من المنتديات التقليدية نهدف من خلاله الى بناء مجتمع عربي ناضج بأسلوب جديد ومختلف.
+
+ان كنت تتساءل عن معنى I/O فهي اختصار لكلمتي Input/Output ويمكن وصفها بأسلوب تواصل أنظمة الحواسيب فيما بينها وبالعالم الخارجي أيضاً، حيث يتم ادخال المعلومات الى هذه الأنظمة لتخرج الناتج في النهاية بعد معالجة المدخلات المرسلة.
+
+انطلق الموقع في أغسطس 2013 باسم Arabia I/O على النطاق arabia.io ثم أعيد تسميته الى حسوب I/O في أبريل 2015."
+  terms:
+    toDo-1: "شارك مواضيع وروابط مثيرة للاهتمام بغرض النقاش"
+    toDo-2: "اكتب عناوين واضحة وكاملة تصف المحتوى بدقة"
+    toDo-3: "قيم المساهمات بناءا على جودتها"
+    notToDo-1: "لا تنشر روابط دعائية بغرض الترويج (SPAM)"
+    notToDo-2: "لا تنشر مواد ليست ضمن تخصص المجتمع"
+    notToDo-3: "لا تطلب من الآخرين رفع مساهماتك لأي سبب"
+  links:
+      new:
+        heading: "أرسل مساهمة جديدة - رابط"
+        select_community: "اختر المجتمع المناسب لهذا الموضوع"
+  topics:
+      new:
+        heading: "أرسل مساهمة جديدة - موضوع"
+        select_community: "اختر المجتمع المناسب لهذا الموضوع"
+  posts:
+    show:
+      title: "العنوان"
+      back: "كل المساهمات"
+      post_not_found: "هذا المنشور غير موجود"
+      comments: "التعليقات"
+      no_comments: "لا يوجد أي تعليق بعد، كن أول من يقوم بالتعليق!"
+      edit: "عدّل"
+    index:
+      all_posts: "كل المساهمات"
+      title: "عنوان المساهمة"
+      my_posts: "مساهماتي"
+      nil_posts: "لا يوجد أي مساهمات!"
+  communities:
+    new:
+      new_community: "أضف مجتمعاً جديداً"
+    show:
+      title: "مجتمع"
+      back: "كل المجتمعات"
+      nil_posts: "لا يوجد أي مساهمات في هذا المجتمع بعد!"
+    index:
+      title: "كل المجتمعات"
+  users:
+    show:
+      title: "العنوان"
+      my_posts: "مساهماتي"
+      back: "كل المساهمات"
+      nil_posts: "لا يوجد أي مساهمات!"
+      my_comments: "تعليقاتي"
+    user_profile:
+      nil_description: "لم تقم بإضافة نبذة عنك بعد! قم بإضافتها من خلال تعديل حسابك"
+      edit_account: "من هنا"
+  comments:
+    new:
+      heading: "أضف رداً"
+    create:
+      success: "تمّ إضافة التعليق بنجاح"
+    comment:
+      reply: "أضف رداً"
+    user_comments:
+      my_posts: "مساهماتي"
+      my_comments: "تعليقاتي"
+      nil: "لا يوجد لدى هذا المستخدم أي تعليقات"
+      reply: "أضف رداً"
+  comment:
+    create:
+      success: "تمّ إضافة التعليق بنجاح"
+  helpers:
+    placeholder:
+      link:
+        title: "العنوان كاملاً يصف الموضوع بدقة"
+        url: الرابط المباشر
+      topic:
+        title: "العنوان كاملاً يصف الموضوع بدقة"
+      community:
+        name: "اسم المجتمع"
+        slug: "الاسم القصير"
+        description: "وصف المجتمع"
+      comment:
+        text: "علق"
+    submit:
+      link:
+        submit: "أرسل"
+      topic:
+        submit: "أرسل"
+      community:
+        submit: "انشاء المجتمع"
+      comment:
+        create: "أضف رداً"
+  activerecord:
+    errors:
+      models:
+        post:
+          attributes:
+            title:
+              blank: "لايمكن للعنوان أن يكون فارغاً"
+              too_short: "العنوان قصير جداً  يجب أن يكون على الأقل خمسة أحرف"
+            community:
+              required: "يجب عليك تحديد مجتمع!"
+        link:
+          attributes:
+            url:
+              blank: "لايمكن لحقل الرابط أن يكون فارغاً"
+            post:
+              required: "منشور "
+        topic:
+          attributes:
+            text:
+              blank: "لا يمكن لنص الموضوع أن يكون فارغاً"
+        community:
+          attributes:
+            name:
+              blank: "لايمكن للاسم أن يكون فارغاً"
+            slug:
+              blank: "لايمكن للاسم القصير أن يكون فارغاً"
+            description:
+              blank: "لايمكن للوصف أن يكون فارغاً"
+        comment:
+          attributes:
+            text:
+              blank: "لايمكنك إضافة تعليق فارغ"
+        user:
+          attributes:
+            first_name:
+              blank: "لا يمكنك تركه فارغاً"
+            last_name:
+              blank: "لا يمكنك تركه فارغاً"
+            email:
+              blank: "لا يمكنك تركه فارغاً"
+            password:
+              blank: "لا يمكنك تركها فارغة"
+
+    attributes:
+      user:
+        first_name: "الاسم"
+        last_name: "اسم العائلة"
+        description: "نبذة عنك"
+        email: "البريد الإلكتروني"
+        country: "الدولة"
+        language: "اللغة"
+        gender: "الجنس"
+        birth_date: "تاريخ الميلاد"
+  administrate:
+    actions:
+      confirm: "هل أنت متأكد ؟"
+      destroy: "حذف"
+      edit: "تعديل"
+      show: "إظهار"
+      new: "جديد"
+      back: "الى الخلف"
+    controller:
+      create:
+        success: ".بنجاح %{resource} لقد تم إنشاء"
+      destroy:
+        success: ".بنجاح %{resource} لقد تم حذف"
+      update:
+        success: ".بنجاح %{resource} لقد تم تحديث"
+    fields:
+      has_many:
+        more: إظهار %{count} من %{total_count}
+        none: "لا يوجد"
+      has_one:
+        not_supported: "غير مدعمه \"HasOne\" هذه العلاقه"
+    search:
+      clear: "مسح البحث"
+      label: بحث %{resource}
+    date:
+      formats:
+        default: "الوقت"
+  time:
+    formats:
+      short: "ساعة"
+  notifications:
+    clean_all: "مسح الإشعارات"
+    all_notifications: "الإشعارات"
+    no_records: "لا يوجد لديك أي إشعارات"
+    comment:
+      user_commented: "قد قام بالتعليق على مساهمتك"
+  templates:
+    sidebar:
+      add:
+        title: "إضافة محتوى"
+        topic: "أضف موضوع"
+        link: "أضف رابط"
+        community: "أضف مجتمع"
+      communities: "المجتمعات"
+      nil_communities: "لا يوجد أي مجتمع بعد، "
+      hsoub-io:
+        title: "حسوب I/O"
+        about: "عن حسوب I/O"
+        terms: "إرشادات الاستخدام"
+      social-media:
+        title: "تابع حسوب I/O"

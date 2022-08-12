@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+    <% if @posts %>
+        <h2><%= t 'rss' %></h2>
+        <div class="content container">
+            <div class="itemsList">
+                <%= render @posts %>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+    <h1>مرحبا بك في حسوب I\O!</h1>
+<% end %>

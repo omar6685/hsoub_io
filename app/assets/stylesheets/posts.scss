@@ -1,0 +1,184 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.itemsList {
+    padding-top: 15px;
+}
+
+.itemsList .listItem {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.itemsList .listItem .post_vote {
+    width: 6%;
+    text-align: center;
+}
+
+.itemsList .listItem.commentBox {
+    border-top: 1px solid #e4e4e4;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #f7f7f7;
+    margin-top: -15px;
+}
+
+.itemsList .listItem.comment {
+    margin-bottom: 15px; 
+}
+
+.itemsList .listItem.comment .postDetails{
+    border: 0;
+    padding-top: 0;
+}
+
+.post_vote .glyphicon {
+    color: #dd4814;
+    font-size: 35px;
+}
+
+.post_points {
+    font-size: 16px;
+    height: 19px;
+    min-width: 23px;
+    direction: ltr;
+    text-align: center;
+}
+
+.itemsList .listItem .postQuestion {
+    padding: 0px;
+}
+
+.postQuestion {
+    float: none;
+    width: auto;
+    display: block;
+}
+
+.postQuestion, .comment .commentMsg {
+    position: relative;
+    float: right;
+    width: 91.66667%;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.post-title h2 {
+    line-height: 1.8;
+    margin-top: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.post-title a {
+    color: #484848;
+}
+
+.postQuestion .postDetails {
+    border-top: 1px solid #e4e4e4;
+    padding-top: 10px;
+}
+
+.postDetails {
+    font-size: 13px;
+    font-family: "Noto Naskh Arabic", verdana, Times, serif;
+    padding-right: 0;
+}
+
+.postDetails>ul>li:first-child {
+    padding-right: 0px;
+    margin-right: 0px;
+    overflow: hidden;
+}
+
+.postDetails>ul>li {
+    border-left: 1px solid #e4e4e4;
+    margin: 5px;
+    padding: 0px 10px;
+    margin-left: 0px;
+    width: auto;
+    height: 25px;
+}
+
+.post-title .postDetails a {
+    color: #3399cc;
+}
+
+.postDetails span, .postDetails a {
+    display: inline-block;
+    padding: 1px;
+    font-size: 13px;
+}
+
+.postDetails i {
+    font-size: 14px;
+    color: #dark-gray;
+    position: relative;
+    top: 2px;
+    margin-left: 3px;
+}
+
+.collection_select{
+    display: block;
+    margin-bottom: 15px;
+}
+
+input:not([type=checkbox]){
+    display: block;
+    margin-bottom: 15px !important;
+    border: 1px solid #e4e4e4;
+    height: 38px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    width: 50%;
+}
+
+select{
+    width: 50%;
+    outline: none;
+    height: 38px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+input[type="submit"] {
+    color: #fff;
+    padding: 9px 0;
+    width: 16%;
+    box-sizing: border-box;
+    margin-left: 15px;
+    background-color: #dd4814;
+    border-color: #dd4814;
+    border-radius: 5px;
+}
+
+.nested_comments {
+  margin-right: 30px;
+}
+
+.nested_comments .nested_comments .nested_comments .nested_comments {
+  margin-right: 0;
+}
+
+#searchinput{
+    width: 500px;
+}
+
+#searchclear{
+    position: absolute;
+    left: 20px;
+    top: -15px;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+}

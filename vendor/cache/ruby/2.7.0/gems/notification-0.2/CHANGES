@@ -1,0 +1,12 @@
+== Version 0.2
+
+* snarl support
+* popup will use snarl or growl depending on which is present on your system
+* should work w/ windows
+
+== Version 0.1
+
+Initial version release, supports :
+* email - via gmail
+* growl
+* sms - via teleflip

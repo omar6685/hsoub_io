@@ -1,0 +1,23 @@
+<h1><%= t '.heading' %></h1>
+
+<%= form_with scope: :link, url: link_path, method: "put" ,local: true do |form| %>
+	<% if @link.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @link.errors.messages.values.each do |msg| %>
+          <%msg.each do  |m| %>
+            <li><%= m %></li>
+          <%end %>
+        <% end %>
+      </ul>
+    </div>
+  	<% end %>
+  <%= hidden_field_tag "link_id", "#{@link.id}" %>
+  <p>
+    <%= form.text_field :url, placeholder: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

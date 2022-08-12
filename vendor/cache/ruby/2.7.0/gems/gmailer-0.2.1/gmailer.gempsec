@@ -1,0 +1,23 @@
+require "rubygems"
+
+spec = Gem::Specification.new do |gem|
+   gem.name        = "gmailer"
+   gem.version     = "0.2.1"
+   gem.author      = "Park Heesob"
+   gem.email       = "phasis_AT_gmail.com"
+   gem.homepage    = "http://rubyforge.org/projects/gmailutils"
+   gem.platform    = Gem::Platform::RUBY
+   gem.description = "An class interface of the Google's webmail service"
+   gem.summary     = "An class interface of the Google's webmail service"
+   gem.has_rdoc    = false
+   gem.files =  Dir['[A-Z]*'] + ['gmailer.rb']
+   gem.files.reject! { |fn| fn.include? "CVS" }
+   gem.require_path = ""
+   gem.extra_rdoc_files = ["README","CHANGES"]
+end
+
+if $0 == __FILE__
+   Gem.manage_gems
+   Gem::Builder.new(spec).build
+end
+

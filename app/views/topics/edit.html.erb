@@ -1,0 +1,23 @@
+<h1><%= t '.heading' %></h1>
+
+<%= form_with scope: :topic, url: topic_path, method: "put" ,local: true do |form| %>
+	<% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @topic.errors.messages.values.each do |msg| %>
+          <%msg.each do  |m| %>
+            <li><%= m %></li>
+          <%end %>
+        <% end %>
+      </ul>
+    </div>
+  	<% end %>
+  <%= hidden_field_tag "topic_id", "#{@topic.id}" %>
+  <p>
+    <%= form.text_area :text , {:class=>'text_area'}%>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
